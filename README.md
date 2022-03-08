@@ -1,2 +1,2 @@
 # Vue-Learning-Samples
-Learning Golang day day up!
+Learning Vue day day up!
