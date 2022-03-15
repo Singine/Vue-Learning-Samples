@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="js/vue.js"></script>
+
+  <style>
+    .demo1{
+      position: relative;
+      display: flex;
+      width:200px;
+      height:50px;
+      margin:5px;
+      border: 1px dashed #666;
+      align-items:center;
+      justify-content:center;
+    }
+    .demo1 button{
+      position: relative;
+      display: block;
+      width: 100px;
+      height: 30px;
+    }
+  </style>
+
+</head>
+<body>
+
+<!--.stop-->
+<!--.prevent-->
+<!--.capture-->
+<!--.self-->
+<!--.once-->
+<!--.passive-->
+
+
+<div id="root">
+  <h1>Hi Gubao!</h1>
+  <h2>{{ action }}</h2>
+
+  <div> <!--  阻止默认事件-->
+    <a href="http://www.sjyolo.com" @click.prevent="showInfo">点我提示信息</a>
+  </div>
+
+  <div class="demo1" @click="showInfo"> <!--  阻止冒泡-->
+    <button @click.stop="showInfo">点我提示信息</button>
+  </div>
+
+  <div class="demo1"> <!--  事件只响应一次-->
+    <button @click.once="showInfo">点我提示信息</button>
+  </div>
+
+
+  <div class="demo1" @click.self="showInfo"> <!--  只有event.target是当前操作元素才会触发-->
+    <button @click.stop="showInfo">点我提示信息</button>
+  </div>
+
+
+</div>
+
+<script type="text/javascript">
+  Vue.config.productionTip = false
+
+  //创建实体类型
+  const vm = new Vue({
+    el: '#root',
+    data:{
+      action:"啵啵",
+    },
+    methods:{
+      showInfo(e){
+        // e.preventDefault();
+        // e.stopPropagation();
+        console.log("咕宝我想你。。");
+      }
+    }
+  })
+
+</script>
+</body>
+</html>
