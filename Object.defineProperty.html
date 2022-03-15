@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+  <script>
+    let num = 18;
+    let person = {
+      name:"咕宝",
+      action:"啵啵",
+    }
+    Object.defineProperty(person,"age",{
+      // value:num,
+      // enumerable:true, //控制属性是否能枚举遍历 默认false
+      // writable:true, //控制属性是否能被修改 默认false
+      // configurable:true,//控制属性是否能被删除 默认false
+
+      // 当有人读取get age属性是 getter会被调用 并返回值
+
+      get(){
+        console.log("读取了数据！")
+        return num
+      },
+
+      // 当有人修改set age属性是 setter会被调用 并返回值
+      set(value){
+        console.log("修改了数据！")
+        num = value
+      }
+
+    })
+    console.log(person);
+  </script>
+</body>
+</html>

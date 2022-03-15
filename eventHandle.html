@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="js/vue.js"></script>
+
+
+</head>
+<body>
+
+
+<div id="root">
+  <h1>Hi Gubao!</h1>
+  <h2>{{ action }}</h2>
+  <button v-on:click="showInfo1">点我提示</button>
+  <button ref="gubao" data-info="bobo" @click="showInfo2($event,6)">点我提示</button>
+</div>
+
+<script type="text/javascript">
+  Vue.config.productionTip = false
+
+  //创建实体类型
+  const vm = new Vue({
+    el: '#root',
+    data:{
+      action:"啵啵",
+    },
+    methods:{
+      showInfo1(event){
+        // alert("我想你咕宝");
+        console.log(this === vm);
+        console.log(event);
+        console.log(event.target);
+      },
+      showInfo2(event,num){
+        // alert("我想你咕宝");
+        console.log(num);
+        console.log(event.target.dataset.info);
+        console.log(this.$refs.gubao.dataset.info);
+      }
+    },
+  })
+
+</script>
+</body>
+</html>

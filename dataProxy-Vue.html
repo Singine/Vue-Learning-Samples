@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="js/vue.js"></script>
+
+
+</head>
+<body>
+
+
+<div id="root">
+  <h1>宝的名字是：{{name}}！</h1>
+  <h2>宝要干嘛：{{action}}！</h2>
+</div>
+
+<script type="text/javascript">
+  Vue.config.productionTip = false
+
+  const vm = new Vue({
+    el: '#root',
+    data: {
+      name: '咕宝',
+      action: '啵啵',
+    }
+  })
+
+</script>
+</body>
+</html>
