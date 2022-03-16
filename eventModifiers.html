@@ -45,6 +45,7 @@
 
   <div class="demo1" @click="showInfo"> <!--  阻止冒泡-->
     <button @click.stop="showInfo">点我提示信息</button>
+    <a href="http://www.sjyolo.com" @click.stop.prevent="showInfo">点我提示信息</a>
   </div>
 
   <div class="demo1"> <!--  事件只响应一次-->

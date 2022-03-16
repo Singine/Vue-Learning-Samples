@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="js/vue.js"></script>
+
+
+</head>
+<body>
+
+<!--别名：-->
+<!--回车 enter-->
+<!--删除 delete-->
+<!--推出 esc-->
+<!--空格 space-->
+<!--换行 tab-->
+<!--上 up-->
+<!--下 down-->
+<!--左 left-->
+<!--右 right-->
+
+
+
+<div id="root">
+  <h1>Hi Gubao!</h1>
+  <input type="text" placeholder="输入完按回车" @keyup.gugu="showInfo">
+  <input type="text" placeholder="输入完按回车" @keyup.ctrl.y="showInfo">
+</div>
+
+<script type="text/javascript">
+  Vue.config.productionTip = false
+  Vue.config.keyCodes.gugu = 13
+
+  //创建实体类型
+  const vm = new Vue({
+    el: '#root',
+    methods:{
+      showInfo(e) {
+        // if (e.keyCode != 13) return
+        console.log(e.target.value)
+        console.log(e.key,e.keyCode)
+      }
+    }
+  })
+
+</script>
+</body>
+</html>
