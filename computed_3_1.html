@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="js/vue.js"></script>
+
+  <style>
+    #root {
+      margin: 10px;
+    }
+  </style>
+
+</head>
+<body>
+
+
+<div id="root">
+  <h2>姓： <input type="text" placeholder="姓" v-model="xing"></h2>
+  <h2>名： <input type="text" placeholder="名" v-model="ming"></h2>
+  <br>
+  <h2>姓名： {{fullName}}</h2>
+</div>
+
+<script type="text/javascript">
+  Vue.config.productionTip = false
+
+  //创建实体类型
+  const vm = new Vue({
+    el: '#root',
+    data: {
+      xing: "咕",
+      ming: "宝",
+    },
+    computed:{
+      fullName:{
+        get(){
+          console.log("get")
+          console.log(this)
+          return this.xing + '-' + this.ming
+        },
+        set(value){
+          this.xing = value.split('-')[0]
+          this.ming = value.split('-')[1]
+        }
+      }
+    }
+
+  })
+
+</script>
+</body>
+</html>

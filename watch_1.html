@@ -5,21 +5,14 @@
   <title>Title</title>
   <script src="js/vue.js"></script>
 
-  <style>
-    #root {
-      margin: 10px;
-    }
-  </style>
 
 </head>
 <body>
 
 
 <div id="root">
-  <h2>姓： <input type="text" placeholder="姓" v-model="xing"></h2>
-  <h2>名： <input type="text" placeholder="名" v-model="ming"></h2>
-  <br>
-  <h2>姓名： {{}}</h2>
+  <h1>今天天气{{info}}</h1>
+  <button v-on:click="change()">切换</button>
 </div>
 
 <script type="text/javascript">
@@ -28,12 +21,19 @@
   //创建实体类型
   const vm = new Vue({
     el: '#root',
-    data: {
-      xing: "咕",
-      ming: "宝",
+    data:{
+      isHot:true,
     },
-    
-
+    methods:{
+      change(){
+        this.isHot = !this.isHot
+      }
+    },
+    computed:{
+      info(){
+        return this.isHot ? "炎热" : "寒冷"
+      }
+    }
   })
 
 </script>
