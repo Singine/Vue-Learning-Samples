@@ -13,11 +13,6 @@
 <div id="root">
   <h1>今天天气{{info}}</h1>
   <button v-on:click="change()">切换</button>
-  <br>
-  <h3>a: {{numbers.a}}</h3>
-  <button v-on:click="numbers.a++;">a++</button>
-  <h3>a: {{numbers.b}}</h3>
-  <button v-on:click="numbers.b++;">b++</button>
 </div>
 
 <script type="text/javascript">
@@ -28,10 +23,7 @@
     el: '#root',
     data: {
       isHot: true,
-      numbers: {
-        a: 1,
-        b: 2,
-      }
+
     },
     methods: {
       change() {
@@ -44,28 +36,35 @@
       }
     },
     watch: {
-      isHot: { //当isHot发生改变
-        handler(n, o) {
-          console.log('change!')
-          console.log(n, o)
-        }
-      },
-      numbers:{
-        deep:true,
-        handler(e){
-          console.log('change!')
-          console.log(e)
-        }
-      }
-      // 'numbers.a': {
+      // isHot: { //当isHot发生改变
+      //   immediate: true,
+      //   deep:true,
       //   handler(n, o) {
       //     console.log('change!')
       //     console.log(n, o)
       //   }
-      // }
+      // },
+      isHot(n, o) {
+        console.log('change!')
+        console.log(n, o)
+      }
 
     },
 
+  })
+
+  // vm.$watch('isHot',{
+  //   immediate: true,
+  //     deep:true,
+  //     handler(n, o) {
+  //       console.log('change!')
+  //       console.log(n, o)
+  //     }
+  // })
+
+  vm.$watch('isHot', function (n, o) {
+    console.log('change!')
+    console.log(n, o)
   })
 
 
