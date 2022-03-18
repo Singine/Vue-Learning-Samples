@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="js/vue.js"></script>
+
+
+</head>
+<body>
+
+
+<div id="root">
+  <h1>Hi Gubao!</h1>
+  <h2 v-show="status">{{ action }}</h2>
+
+  <button v-on:click="changeFunc">点我变变</button>
+</div>
+
+<script type="text/javascript">
+  Vue.config.productionTip = false
+
+  //创建实体类型
+  const vm = new Vue({
+    el: '#root',
+    data:{
+      action:"啵啵",
+      status:true,
+    },
+    methods:{
+      changeFunc(){
+        this.status = !this.status
+      }
+    }
+  })
+
+</script>
+</body>
+</html>

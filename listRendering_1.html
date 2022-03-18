@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="js/vue.js"></script>
+
+
+</head>
+<body>
+
+
+<div id="root">
+  <h1>Hi Gubao!</h1>
+
+  <ul>
+    <li v-for="(p,index) in personList" :key="index">{{p.id}} - {{p.name}}</li>
+  </ul>
+
+
+  <ul>
+    <li v-for="(value,k) in actionList" :key="k">{{k}}:{{value}}</li>
+  </ul>
+
+  <ul>
+    <li v-for="(word,index) in str" :key="index">{{word}}--{{index}}</li>
+  </ul>
+
+  <ul>
+    <li v-for="(num,index) in 5" :key="index">{{num}}--{{index}}</li>
+  </ul>
+
+
+</div>
+
+<script type="text/javascript">
+  Vue.config.productionTip = false
+
+  //创建实体类型
+  const vm = new Vue({
+    el: '#root',
+    data:{
+      personList:[
+        {id:'001',name:'咕宝',},
+        {id:'002',name:'灰灰',},
+        {id:'003',name:'药药',},
+      ],
+      actionList:{
+        action1:'啵啵',
+        action2:'抱抱',
+        action3:'想咕宝',
+      },
+      str:'Gubao',
+    },
+  })
+
+</script>
+</body>
+</html>
