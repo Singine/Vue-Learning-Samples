@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="js/vue.js"></script>
+</head>
+<body>
+<div id="root">
+  <h1>Hi Gubao!</h1>
+  <br>
+  <input type="text" placeholder="输入要找找的名字" v-model="keyword">
+  <button @click="sortType = 2">升序</button>
+  <button @click="sortType = 1">降序</button>
+  <button @click="sortType = 0">重置</button>
+  <br>
+  <ul>
+    <li v-for="(p,index) in newPersonList" :key="p.id">
+      {{p.name}} -- {{p.age}}
+    </li>
+  </ul>
+</div>
+<script type="text/javascript">
+  Vue.config.productionTip = false
+  //创建实体类型
+  const vm = new Vue({
+    el: '#root',
+    data:{
+      personList:[
+        {id:'001',name:'咕宝',age:5},
+        {id:'002',name:'灰灰',age:3},
+        {id:'003',name:'药药',age:2},
+        {id:'004',name:'嘿嘿',age:2},
+        {id:'005',name:'边边',age:2},
+        {id:'006',name:'獭獭',age:1},
+        {id:'007',name:'龟龟',age:1},
+        {id:'008',name:'嘎嘎嘎',age:1},
+        {id:'009',name:'咕咕宝',age:1},
+        {id:'010',name:'哇哇哇哇',age:1},
+      ],
+      keyword:'',
+      sortType:0,
+    },
+    computed:{
+      newPersonList(){
+        const arr = this.personList.filter((p)=>{
+          return p.name.indexOf(this.keyword) !== -1
+        })
+
+        if(this.sortType){
+          arr.sort((a,b)=>{
+            return this.sortType === 1 ? b.age-a.age : a.age-b.age
+          })
+        }
+
+        return arr
+      },
+
+    },
+
+  })
+
+</script>
+</body>
+</html>

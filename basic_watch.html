@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="js/vue.js"></script>
+</head>
+<body>
+<div id="root">
+  <h1>Hi Gubao!</h1>
+  <br>
+  <button @click="updateGubao">更新</button>
+  <br>
+  <ul>
+    <li v-for="(p,index) in personList" :key="p.id">
+      {{p.name}} -- {{p.age}}
+    </li>
+  </ul>
+</div>
+<script type="text/javascript">
+  Vue.config.productionTip = false
+  //创建实体类型
+  const vm = new Vue({
+    el: '#root',
+    data:{
+      personList:[
+        {id:'001',name:'咕宝',age:5},
+        {id:'002',name:'灰灰',age:3},
+        {id:'003',name:'药药',age:2},
+        {id:'004',name:'嘿嘿',age:2},
+        {id:'005',name:'边边',age:2},
+        {id:'006',name:'獭獭',age:1},
+        {id:'007',name:'龟龟',age:1},
+        {id:'008',name:'嘎嘎嘎',age:1},
+        {id:'009',name:'咕咕宝',age:1},
+        {id:'010',name:'哇哇哇哇',age:1},
+      ],
+    },
+    methods:{
+      updateGubao(){
+        // this.personList[0].name = '小咕宝'
+        // this.personList[0].age = 4
+        this.personList[0] = {id:'001',name:'小咕宝',age:4}
+      }
+    }
+
+  })
+
+</script>
+</body>
+</html>
