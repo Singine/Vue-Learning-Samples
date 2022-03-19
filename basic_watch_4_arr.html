@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="js/vue.js"></script>
+</head>
+
+<body>
+  <div id="root">
+    <h1>Hi Gubao!</h1>
+    <br>
+    <h2>名字：{{name}}</h2>
+    <h2>地址：{{address}}</h2>
+    <br>
+    <h2>宝宝们：<button @click="showSex">{{buttonInfo}}</button></h2>
+    <ul>
+      <li v-for="(b,index) in baby" :key="index">
+        {{b.name}} - {{b.age}} - {{b.sex}}
+      </li>
+    </ul>
+    <br>
+  </div>
+  <script type="text/javascript">
+    Vue.config.productionTip = false
+    //创建实体类型
+    const vm = new Vue({
+      el: '#root',
+      data: {
+        name: '咕宝',
+        address: '地球',
+        baby: [
+          { name: 'huihui', age: '1' },
+          { name: 'yaoyao', age: '1' },
+        ],
+        buttonInfo: '点我偷看宝宝性别'
+      },
+      methods: {
+        showSex() {
+          this.$set(this.baby[0], 'sex', '男')
+          this.$set(this.baby[1], 'sex', '女')
+          this.buttonInfo = '哇看到了棒棒'
+        }
+      },
+    })
+
+    let obj = {
+      name: 'gagaga', 
+      age: '1',
+      sex: '男',
+    }
+
+    vm.$set(vm.baby,2,obj)
+
+
+
+  </script>
+</body>
+
+</html>
