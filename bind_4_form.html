@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="js/vue.js"></script>
+  <style>
+    div {
+      margin-bottom: 10px;
+    }
+  </style>
+
+</head>
+
+<body>
+  <!-- TODO -->
+  <!-- FIXME  -->
+  <!-- DONE -->
+  <!-- DATE -->
+  <!-- MARK -->
+
+  <div id="root">
+    <h1>Hi Gubao!</h1>
+    <form @submit.prevent="submitForm">
+      <div><label for="input_name"> 宝宝姓名：</label><input type="text" id="input_name" v-model.trim="userInfo.name"></div>
+      <div><label for="input_age"> 宝宝年龄：</label><input type="text" id="input_age" v-model.number="userInfo.age"></div>
+      <div>
+        性别：
+        <input type="radio" name="input_sex" id="input_sex_1" v-model="userInfo.sex" value="male"><label for="input_sex_1">
+          男</label>
+        <input type="radio" name="input_sex" id="input_sex_2" v-model="userInfo.sex" value="female"><label for="input_sex_2">
+          女</label>
+      </div>
+      <div>
+        爱好：
+        <input type="checkbox" name="input_hobby" id="input_hobby_1" v-model="userInfo.hobby" value="wanwan"><label
+          for="input_hobby_1"> 玩玩</label>
+        <input type="checkbox" name="input_hobby" id="input_hobby_2" v-model="userInfo.hobby" value="xuexue"><label
+          for="input_hobby_2"> 学学</label>
+        <input type="checkbox" name="input_hobby" id="input_hobby_3" v-model="userInfo.hobby" value="gaga"><label
+          for="input_hobby_3"> 嘎嘎</label>
+      </div>
+      <div>
+        和哪个动物绑定：
+        <select v-model="userInfo.animal">
+          <option value="heihei">嘿嘿</option>
+          <option value="bianbian">边边</option>
+          <option value="tata">獭獭</option>
+          <option value="guigui">龟龟</option>
+        </select>
+      </div>
+      <div>
+        <div>备注：</div>
+        <textarea v-model.lazy="userInfo.note"></textarea>
+      </div>
+      <div>
+        <input type="checkbox" id="input_check" v-model="userInfo.check"><label for="input_check"> 已阅读<a href="www.sjyolo.com"
+            target="_blank">《宝宝协议》</a></label>
+      </div>
+      <button type="submit">提交</button>
+    </form>
+
+
+  </div>
+
+  <script type="text/javascript">
+    Vue.config.productionTip = false
+
+    //创建实体类型
+    const vm = new Vue({
+      el: '#root',
+      data: {
+        userInfo: {
+          name: '',
+          age: 1,
+          sex: 'male',
+          hobby: [],
+          animal: 'heihei',
+          note: '',
+          check: false,
+        }
+      },
+      methods: {
+        submitForm() {
+          console.log(JSON.stringify(this.userInfo))
+        }
+      },
+    })
+
+  </script>
+</body>
+
+</html>

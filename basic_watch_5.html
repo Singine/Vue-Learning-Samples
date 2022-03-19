@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="js/vue.js"></script>
+  <style>
+    button{
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="root">
+    <h1>Hi Gubao!</h1>
+    <br>
+    <button @click="family.age++">点点咕宝变大</button> <br />
+    <button @click="showSex">偷看宝宝性别</button> <br />
+    <button @click="addBaby">加一个宝宝</button> <br />
+    <button @click="changeName">不要叫嘎嘎嘎 要叫哇哇哇哇</button> <br />
+    <br />
+    <h2>名字：{{family.name}}</h2>
+    <h2>年龄：{{family.age}}</h2>
+    <h2>地址：{{family.address}}</h2>
+    <br />
+    <h2>宝宝们：</h2>
+    <ul>
+      <li v-for="(b,index) in family.baby" :key="index">
+        <a>{{b.name}}</a> - <a>{{b.age}}</a><a v-if="b.sex"> - {{b.sex}}</a>
+      </li>
+    </ul>
+    <br />
+  </div>
+  <script type="text/javascript">
+    Vue.config.productionTip = false
+    //创建实体类型
+    const vm = new Vue({
+      el: '#root',
+      data: {
+        family: {
+          name: '咕宝',
+          address: '地球',
+          age: 5,
+          baby: [
+            { name: 'huihui', age: '1' },
+            { name: 'yaoyao', age: '1' },
+          ],
+        },
+      },
+      methods: {
+        showSex() {
+          this.$set(this.family.baby[0], 'sex', '男')
+          this.$set(this.family.baby[1], 'sex', '女')
+        },
+        addBaby() {
+          let newbaby = { name: 'gagaga', age: '0' }
+          this.family.baby.push(newbaby)
+        },
+        changeName() {
+          this.$set(this.family.baby[2], 'name', '哇哇哇哇')
+          this.family.baby[2].age = 1
+        }
+      },
+    })
+
+
+
+  </script>
+</body>
+
+</html>
