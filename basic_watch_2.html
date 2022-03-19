@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="js/vue.js"></script>
+</head>
+<body>
+<div id="root">
+  <h1>Hi Gubao!</h1>
+  <br>
+  <h2>名字：{{name}}</h2>
+  <h2>学校地址：{{address}}</h2>
+  <br>
+</div>
+<script type="text/javascript">
+  Vue.config.productionTip = false
+  //创建实体类型
+  const vm = new Vue({
+    el: '#root',
+    data:{
+      name:'咕宝',
+      address:'地球',
+    },
+
+  })
+
+</script>
+</body>
+</html>
