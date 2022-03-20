@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <title>Title</title>
   <script src="js/vue.js"></script>
+  <script src="js/dayjs.min.js"></script>
 
 
 </head>
@@ -12,19 +13,55 @@
 
 <div id="root">
   <h1>Hi Gubao!</h1>
-  <h2>{{ action }}</h2>
-  <button v-on:click="showInfo1">点我提示</button>
+  <h2>显示时间</h2>
+  <h2>时间戳：{{ time }}</h2>
+  <h2>真实时间：{{ formatTime }}</h2>
+  <h2>真实时间：{{ getFormatTime() }}</h2>
+  <h2>过滤器1：{{ time | timeFormater }}</h2>
+  <h2>过滤器2：{{ time | timeFormater('YYYY MM DD') }}</h2>
+  <h2>过滤器3：{{ time | timeFormater('YYYY MM DD') | getSlice }}</h2>
+ 
+  <br/>
+  <br/>
+
+  <h2 :data-time="time | timeFormater">时间属性data-time</h2>
+  <input type="text" v-model="time">
+
 </div>
 
 <script type="text/javascript">
   Vue.config.productionTip = false
 
+  //全局过滤器
+  Vue.filter('mySlice',function(val){
+    return val.slice(0,4)
+  })
+
   //创建实体类型
   const vm = new Vue({
     el: '#root',
     data:{
-      action:"啵啵",
+      time:Date.now(),
     },
+    computed:{
+      formatTime(){
+        return dayjs(this.time).format('YYYY-MM-DD')
+      }
+    },
+    methods: {
+      getFormatTime(){
+        return dayjs(this.time).format('YYYY/MM/DD')
+      }
+    },
+    //局部过滤器
+    filters:{
+      timeFormater(val,str='YYYY年MM月DD日'){
+        return dayjs(val).format(str)
+      },
+      getSlice(val){
+        return val.slice(0,4)
+      }
+    }
   })
 </script>
 </body>

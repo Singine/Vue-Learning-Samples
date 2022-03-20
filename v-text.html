@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="js/vue.js"></script>
+
+
+</head>
+<body>
+
+
+<div id="root">
+  <h1>Hi Gubao!</h1>
+  <h2 v-text="'要'+action"></h2>
+  <div v-html="html"></div>
+</div>
+
+<script type="text/javascript">
+  Vue.config.productionTip = false
+
+  //创建实体类型
+  const vm = new Vue({
+    el: '#root',
+    data:{
+      action:"啵啵",
+      html:'<h3>棒棒</h3>'
+    },
+  })
+
+</script>
+</body>
+</html>
