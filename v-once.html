@@ -18,7 +18,11 @@
 <div id="root">
   <h1>Hi Gubao!</h1>
  
-  <h2 v-cloak >{{action}}</h2>
+  <h2>只能一次的：{{action}}</h2>
+  <br/>
+  <h3 v-once>初始的次数是：{{n}}</h3>
+  <h3>当前的次数是：{{n}}</h3>
+  <button @click="n++">点点啵啵</button>
 </div>
 
 <script type="text/javascript">
@@ -29,7 +33,9 @@
     el: '#root',
     data:{
       action:"啵啵！",
+      n:0,
     },
+
   })
 
 </script>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="js/vue.js"></script>
+
+
+</head>
+
+<body>
+
+
+  <div id="root" :x='n'>
+    <h1>Hi Gubao!</h1>
+    <h2>当前的n是：{{n}}</h2>
+    <h2 v-text="n"></h2>
+    <button @click="addN">点我加加</button>
+    <button @click="bye">点我再见</button>
+  </div>
+
+  <script type="text/javascript">
+    Vue.config.productionTip = false
+
+    //创建实体类型
+    const vm = new Vue({
+      // el: '#root',
+      // template: `
+      // <div :x='n'>
+      // <h1>Hi Gubao!</h1>
+      // <h2>当前的n是：{{n}}</h2>
+      // <button @click="addN">点我加加</button>
+      // </div>`,
+      data: {
+        n: 1,
+      },
+      methods: {
+        addN() {
+          console.log('addN')
+          this.n++
+        },
+        bye(){
+          console.log('bye')
+          this.$destroy()
+        }
+      },
+      beforeCreate() {
+        console.log('beforeCreate')
+      },
+      created() {
+        console.log('created')
+      },
+      beforeMount() {
+        console.log('beforeMount')
+        console.log(this)
+      },
+      mounted() {
+        console.log('mounted')
+        console.log(this)
+        console.log(this.$el)
+      },
+      beforeUpdate() {
+        console.log('beforeUpdate')
+        console.log(this.n)
+      },
+      updated() {
+        console.log('updated')
+      },
+      beforeDestroy() {
+        console.log('beforeDestroy')
+        console.log(this.n)
+
+        //关闭定时器
+        //收尾工作
+      },
+      destroyed() {
+        console.log('destroyed')
+        console.log(this.n)
+        this.addN()
+      },
+    })
+
+    vm.$mount('#root')
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/vue.js"></script>
+
+
+</head>
+
+<body>
+
+
+    <div id="root">
+        <h1>{{hello}}</h1>
+        <Gubao></Gubao>
+        <Bobo></Bobo>
+        <br>
+        <baby/>
+
+
+    </div>
+
+    <script type="text/javascript">
+        Vue.config.productionTip = false
+
+        //创建组件
+        const gubao = Vue.extend({
+            
+            data() {
+                return {
+                    action: "啵啵",
+                    address: "地球",
+                }
+            },
+            template: `
+              <div>
+                <h2>{{ action }}</h2>
+                <h2>{{ address }}</h2>
+              </div>
+            `
+        })
+        const baby = Vue.extend({
+            data() {
+                return {
+                    name: ["灰灰"],
+                    age: 1,
+                }
+            },
+            template: `
+              <div>
+                <h2 v-for="(n,index) in name" :key="index">宝宝名字：{{n}}</h2>
+                <h2>宝宝年龄：{{age}}</h2>
+                <button @click="addBaby">点点加宝宝</button>
+              </div>
+            `,
+            methods: {
+                addBaby() {
+                    this.name.push("药药")
+                }
+            },
+        })
+
+        const bobo = {
+            name:"Bobobo",
+            data(){
+                return{
+                    action:"啵啵！"
+                }
+            },
+            template:`
+                <div>{{action}}</div>
+            `
+        }
+
+
+        //全局注册组件
+        Vue.component('Bobo',bobo)
+
+        //创建实体类型
+        new Vue({
+            el: '#root',
+            data: {
+                hello: "Hi Gubao!",
+            },
+            //局部注册组件
+            components: {
+                Gubao:gubao,
+                Baby:baby
+            }
+        })
+
+
+
+
+
+
+    </script>
+</body>
+
+</html>

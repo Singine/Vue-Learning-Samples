@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="js/vue.js"></script>
+
+
+</head>
+
+<body>
+
+
+  <div id="root">
+    <h1>Hi Gubao!</h1>
+    <h2>变变{{count}}次啦</h2>
+    <h2 :style="{opacity}">{{ action }}</h2>
+    <button @click="stop">暂停</button>
+    <button @click="opacity = 1">变亮亮</button>
+  </div>
+
+  <script type="text/javascript">
+    Vue.config.productionTip = false
+
+    //创建实体类型
+    const vm = new Vue({
+      // el: '#root',
+      data: {
+        action: "啵啵",
+        opacity: 1,
+        count: 0
+      },
+      methods: {
+        stop(){
+          
+          this.$destroy()
+        }
+      },
+      
+      mounted() {
+        console.log('mounted')
+        
+        this.timer = setInterval(() => {
+          console.log('setInterval')
+          this.opacity -= 0.01
+          if (this.opacity <= 0) {
+            this.opacity = 1
+            this.count++
+          }
+        }, 16);
+      },
+      
+      beforeDestroy() {
+        console.log('beforeDestroy')
+        clearInterval(this.timer)
+      },
+      destroyed() {
+        console.log('destroyed')
+      },
+    })
+
+    vm.$mount('#root')
+
+  </script>
+</body>
+
+</html>
