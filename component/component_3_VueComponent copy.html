@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/vue.js"></script>
+
+
+</head>
+
+<body>
+    <div id="root">
+        <Gubao></Gubao>
+    </div>
+
+    <script type="text/javascript">
+        Vue.config.productionTip = false
+
+
+        const Sub = Vue.extend({
+            template:`<span>test</span>`
+        })
+
+        const Gubao = Vue.extend({
+            name: "Gubao",
+            data() {
+                return {
+                    hello: "Hi Gubao!",
+                    action: "啵啵",
+                    address: "地球",
+                }
+            },
+            template: `
+              <div id="Gubao">
+                <h1>{{hello}}</h1>
+                <h2>{{ action }}</h2>
+                <h2>{{ address }}</h2>
+                <Sub></Sub>
+                <button @click="showThis">点点</button>
+              </div>
+            `,
+            methods: {
+                showThis(){
+                    console.log(this)
+                    console.log(this.hello)
+                    console.log(this._data)
+                }
+            },
+            components:{
+                Sub
+            }
+        })
+
+
+        //创建实体类型
+        const vm = new Vue({
+            el: '#root',
+            data: {
+
+            },
+            //局部注册组件
+            components: {
+                Gubao
+            }
+        })
+
+        console.log(Gubao);
+
+
+
+
+    </script>
+</body>
+
+</html>
