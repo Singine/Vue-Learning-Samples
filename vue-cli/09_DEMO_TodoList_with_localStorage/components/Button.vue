@@ -15,7 +15,7 @@
 <script>
 export default {
   name: "Button",
-  props: ["babyArr", "getCheckAll"],
+  props: ["babyArr", "getCheckAll", "deleteCheckedAll"],
   computed: {
     getBabyStatusChecked() {
       return this.babyArr.reduce((pre, current) => {
@@ -33,13 +33,14 @@ export default {
         );
       },
       set(value) {
-        this.$emit("getCheckAll", value);
+        this.getCheckAll(value);
       },
     },
   },
   methods: {
     deleteAll() {
-      if (confirm("真的都不要了嘛...")) this.$emit("deleteCheckedAll");
+      if(confirm("真的都不要了嘛...")) this.deleteCheckedAll();
+      
     },
   },
 };

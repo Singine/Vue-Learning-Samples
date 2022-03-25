@@ -17,6 +17,7 @@ export default {
       newBabyName: "",
     };
   },
+  props: ["getNewBaby"],
   methods: {
     addBaby() {
       if (!this.newBabyName.trim()) {
@@ -29,7 +30,7 @@ export default {
         name: this.newBabyName,
         status: false,
       };
-      this.$emit('getNewBaby',newBaby);
+      this.getNewBaby(newBaby);
       this.newBabyName = "";
     },
   },

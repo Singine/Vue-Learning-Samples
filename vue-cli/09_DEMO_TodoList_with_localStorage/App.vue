@@ -1,6 +1,6 @@
 <template>
   <div class="componentBox">
-    <Input @getNewBaby="getNewBaby" />
+    <Input :getNewBaby="getNewBaby" />
     <List
       :babyArr="babyList"
       :getBabyStatus="getBabyStatus"
@@ -8,8 +8,8 @@
     />
     <Button
       :babyArr="babyList"
-      @getCheckAll="getCheckAll"
-      @deleteCheckedAll="deleteCheckedAll"
+      :getCheckAll="getCheckAll"
+      :deleteCheckedAll="deleteCheckedAll"
     />
   </div>
 </template>

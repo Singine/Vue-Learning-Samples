@@ -1,12 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
-    
+    <h2>Hi Gubao!</h2>
+    <button onclick="saveData()">点我保存数据</button>
+    <button onclick="readData()">点我读取数据</button>
+    <button onclick="deleteData()">点我删除数据</button>
+    <button onclick="clearData()">点我清空数据</button>
+    <script>
+        let baby = [{
+            name: 'huihui',
+            age: '1'
+        }]
+        function saveData() {
+            sessionStorage.setItem('msg', 'Hi Gubao!')
+            sessionStorage.setItem('baby', JSON.stringify(baby))
+
+        }
+        function readData() {
+            let data = sessionStorage.getItem('baby')
+            console.log(JSON.parse(data))
+        }
+        function deleteData() {
+            sessionStorage.removeItem('msg')
+        }
+        function clearData() {
+            sessionStorage.clear()
+        }
+    </script>
 </body>
+
 </html>
