@@ -1,10 +1,15 @@
 <template>
   <div class="componentBox">
     <Input :getNewBaby="getNewBaby" />
-    <List :babyArr="babyList" :getBabyStatus="getBabyStatus" />
+    <List
+      :babyArr="babyList"
+      :getBabyStatus="getBabyStatus"
+      :deleteBaby="deleteBaby"
+    />
     <Button
-      :babyLen="babyList.length"
-      :getBabyStatusChecked="getBabyStatusChecked"
+      :babyArr="babyList"
+      :getCheckAll="getCheckAll"
+      :deleteCheckedAll="deleteCheckedAll"
     />
   </div>
 </template>
@@ -42,15 +47,25 @@ export default {
         }
       });
     },
-    getBabyStatusChecked() {
-      let count = 0;
-      this.babyList.forEach((baby) => {
-        if (baby.status) {
-          count++;
-        }
-      });
-      return count;
+    deleteBaby(id) {
+      if (confirm("不要宝宝了嘛...")) {
+        this.babyList.forEach((baby, index) => {
+          if (baby.id === id) {
+            this.babyList.splice(index, 1);
+          }
+        });
+      }
     },
+    getCheckAll(status){
+      this.babyList.forEach((baby)=>{
+        baby.status = status
+      })
+    },
+    deleteCheckedAll(){
+      this.babyList = this.babyList.filter((baby)=>{
+        return !baby.status
+      })
+    }
   },
 };
 </script>
@@ -59,7 +74,7 @@ export default {
 .componentBox {
   position: relative;
   width: 500px;
-  min-height: 300px;
+  min-height: auto;
   margin: 100px auto;
   border: 1px dashed #333;
   border-radius: 10px;

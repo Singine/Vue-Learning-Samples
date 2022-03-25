@@ -7,6 +7,7 @@
       :babyID="baby.id"
       :babyName="baby.name"
       :babyStatus="baby.status"
+      :deleteBaby="deleteBaby"
     />
   </div>
 </template>
@@ -18,7 +19,7 @@ export default {
   components: {
     Row,
   },
-  props: ["babyArr", "getBabyStatus", "getBabyStatus"],
+  props: ["babyArr", "getBabyStatus", "deleteBaby"],
 };
 </script>
 

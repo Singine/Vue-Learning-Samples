@@ -9,14 +9,16 @@
       @click="getBabyStatus(babyID)"
     />
     <label :for="babyID">{{ babyName }}</label>
-    <button type="button" class="deleteBtn">x</button>
+    <button type="button" class="deleteBtn" @click="deleteBaby(babyID)">
+      不要了
+    </button>
   </div>
 </template>
 
 <script>
 export default {
   name: "Row",
-  props: ["babyID", "babyName", "babyStatus", "getBabyStatus"],
+  props: ["babyID", "babyName", "babyStatus", "getBabyStatus", "deleteBaby"],
 };
 </script>
 
@@ -47,17 +49,21 @@ label {
 .deleteBtn {
   display: none;
   position: relative;
-
   float: right;
-  width: 25px;
+  width: 60px;
   height: 25px;
-  border: none;
   background-color: transparent;
   margin-right: 15px;
-  color: #ababab;
+  color: #333;
   cursor: pointer;
+  border: 1px solid;
+  border-color: #333;
 }
 .rowBox:hover .deleteBtn {
   display: inline-block;
+}
+.deleteBtn:hover{
+  color: rgb(243, 91, 91);
+  border-color: rgb(243, 91, 91);
 }
 </style>
