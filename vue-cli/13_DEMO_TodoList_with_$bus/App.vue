@@ -3,6 +3,8 @@
     <Input @getNewBaby="getNewBaby" />
     <List
       :babyArr="babyList"
+
+
       :getBabyStatus="getBabyStatus"
       :deleteBaby="deleteBaby"
     />
@@ -19,8 +21,6 @@ import Button from "./components/Button";
 import Input from "./components/Input";
 import List from "./components/List";
 
-import pubsub from "pubsub-js";
-
 export default {
   name: "App",
   components: {
@@ -30,7 +30,7 @@ export default {
   },
   data() {
     return {
-      babyList: JSON.parse(localStorage.getItem("babyList")) || [],
+      babyList: JSON.parse(localStorage.getItem('babyList')) || [],
     };
   },
   methods: {
@@ -44,7 +44,7 @@ export default {
         }
       });
     },
-    deleteBaby(_, id) {
+    deleteBaby(id) {
       if (confirm("不要宝宝了嘛...")) {
         this.babyList.forEach((baby, index) => {
           if (baby.id === id) {
@@ -53,52 +53,37 @@ export default {
         });
       }
     },
-    updateBabyName(id, newValue) {
-      this.babyList.forEach((baby) => {
-        if (baby.id === id) {
-          baby.name = newValue;
-        }
-      });
+    getCheckAll(status){
+      this.babyList.forEach((baby)=>{
+        baby.status = status
+      })
     },
-    getCheckAll(status) {
-      this.babyList.forEach((baby) => {
-        baby.status = status;
-      });
-    },
-    deleteCheckedAll() {
-      this.babyList = this.babyList.filter((baby) => {
-        return !baby.status;
-      });
-    },
+    deleteCheckedAll(){
+      this.babyList = this.babyList.filter((baby)=>{
+        return !baby.status
+      })
+    }
   },
-  watch: {
-    babyList: {
-      deep: true,
-      handler(value) {
-        localStorage.setItem("babyList", JSON.stringify(value));
-      },
-    },
+  watch:{
+    babyList:{
+      deep:true,
+      handler(value){
+        localStorage.setItem('babyList',JSON.stringify(value))
+      }
+    }
   },
-  mounted() {
-    this.$bus.$on("getBabyStatus", this.getBabyStatus);
-    this.$bus.$on("updateBabyName", this.updateBabyName);
-
-    this.pubid = pubsub.subscribe("deleteBaby", this.deleteBaby);
+  mounted(){
+    this.$bus.$on('getBabyStatus',this.getBabyStatus)
+    this.$bus.$on('deleteBaby',this.deleteBaby)
   },
-  beforeDestroy() {
-    this.$bus.$off("getBabyStatus");
-
-    pubsub.unsubscribe(this.pubid);
-  },
+  beforeDestroy(){
+    this.$bus.$off('getBabyStatus')
+    this.$bus.$off('deleteBaby')
+  }
 };
 </script>
 
 <style>
-* {
-  -webkit-user-select: none; /* Safari */
-  -ms-user-select: none; /* IE 10+ and Edge */
-  user-select: none; /* Standard syntax */
-}
 .componentBox {
   position: relative;
   width: 500px;
@@ -106,9 +91,5 @@ export default {
   margin: 100px auto;
   border: 1px dashed #333;
   border-radius: 10px;
-}
-input::selection {
-   color: #fff;
-   background-color: #333;
 }
 </style>

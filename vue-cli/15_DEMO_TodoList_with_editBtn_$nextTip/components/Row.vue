@@ -60,16 +60,16 @@ export default {
       // setTimeout(() => {
       //   this.$refs.newEditInput.focus();
       // }, 10);
-      this.$nextTick(function () {
-        this.$refs.newEditInput.focus();
-      });
-    },
+      this.$nextTick(function(){
+         this.$refs.newEditInput.focus();
+      })
+},
     updateNewValue(baby, e) {
       baby.isEdit = false;
       if (e.target.value.trim()) {
         this.$bus.$emit("updateBabyName", baby.id, e.target.value);
-      } else {
-        alert("宝宝不能没有名字！");
+      }else{
+        alert('宝宝不能没有名字！')
       }
     },
   },
@@ -78,6 +78,15 @@ export default {
 
 <style >
 input.rowEdit {
+  /* position: relative;
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  border: 1px dashed rgba(0, 0, 0, 0.123);
+  outline: none;
+  width: 100px;
+  height: 19px;
+  font-size: 16px; */
   position: absolute;
   display: inline-block;
   margin: 0;
@@ -135,8 +144,8 @@ label {
   border-color: rgb(243, 91, 91);
 }
 .editBtn:hover {
-  background-color: #333;
+  background-color: rgb(31, 110, 201);
   color: #fff;
-  border-color: #333;
+  border-color: rgb(31, 110, 201);
 }
 </style>

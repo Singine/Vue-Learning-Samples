@@ -44,7 +44,7 @@ export default {
         }
       });
     },
-    deleteBaby(_, id) {
+    deleteBaby(_,id) {
       if (confirm("不要宝宝了嘛...")) {
         this.babyList.forEach((baby, index) => {
           if (baby.id === id) {
@@ -53,12 +53,12 @@ export default {
         });
       }
     },
-    updateBabyName(id, newValue) {
-      this.babyList.forEach((baby) => {
-        if (baby.id === id) {
-          baby.name = newValue;
+    updateBabyName(id,newValue){
+      this.babyList.forEach((baby)=>{
+        if(baby.id === id){
+          baby.name = newValue
         }
-      });
+      })
     },
     getCheckAll(status) {
       this.babyList.forEach((baby) => {
@@ -70,6 +70,7 @@ export default {
         return !baby.status;
       });
     },
+    
   },
   watch: {
     babyList: {
@@ -83,22 +84,18 @@ export default {
     this.$bus.$on("getBabyStatus", this.getBabyStatus);
     this.$bus.$on("updateBabyName", this.updateBabyName);
 
-    this.pubid = pubsub.subscribe("deleteBaby", this.deleteBaby);
+    this.pubid = pubsub.subscribe("deleteBaby",this.deleteBaby);
   },
   beforeDestroy() {
     this.$bus.$off("getBabyStatus");
+    
+    pubsub.unsubscribe(this.pubid)
 
-    pubsub.unsubscribe(this.pubid);
   },
 };
 </script>
 
 <style>
-* {
-  -webkit-user-select: none; /* Safari */
-  -ms-user-select: none; /* IE 10+ and Edge */
-  user-select: none; /* Standard syntax */
-}
 .componentBox {
   position: relative;
   width: 500px;
@@ -106,9 +103,5 @@ export default {
   margin: 100px auto;
   border: 1px dashed #333;
   border-radius: 10px;
-}
-input::selection {
-   color: #fff;
-   background-color: #333;
 }
 </style>

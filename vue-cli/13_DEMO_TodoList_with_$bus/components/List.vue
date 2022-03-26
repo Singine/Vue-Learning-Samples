@@ -1,17 +1,16 @@
 <template>
   <div class="listBox">
-    <transition-group
-      name="animate__animated animate__fadeIn"
-      enter-active-class="animate__fadeIn"
-      leave-active-class="animate__fadeOut ani"
-    >
-      <Row v-for="baby in babyArr" :key="baby.id" :baby="baby" />
-    </transition-group>
+    <Row
+      v-for="baby in babyArr"
+      :key="baby.id"
+      :babyID="baby.id"
+      :babyName="baby.name"
+      :babyStatus="baby.status"
+    />
   </div>
 </template>
 
 <script>
-import "animate.css";
 import Row from "./Row";
 export default {
   name: "List",
