@@ -1,19 +1,13 @@
 import Vue from 'vue'
 import App from './App'
-import store from "./store";
+import vueResource from 'vue-resource'
 Vue.config.productionTip = false
-
-
-
+Vue.use(vueResource)
 
 new Vue({
     el:'#app',
     render: h => h(App),
-    store,
     beforeCreate(){      //全局事件总线
         Vue.prototype.$bus = this
-    },
-    mounted(){
-        console.log(this)
     }
 })
