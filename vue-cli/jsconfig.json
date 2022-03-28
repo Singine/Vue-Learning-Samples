@@ -6,7 +6,7 @@
     "moduleResolution": "node",
     "paths": {
       "@/*": [
-        "src/*"
+        "20_DEMO_GithubSearch_with_vue-resource/*"
       ]
     },
     "lib": [

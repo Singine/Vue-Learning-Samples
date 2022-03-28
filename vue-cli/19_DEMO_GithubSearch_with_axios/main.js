@@ -1,10 +1,9 @@
 import Vue from 'vue'
 import App from './App'
-import vueResource from 'vue-resource'
-Vue.config.productionTip = false
-Vue.use(vueResource)
 
-new Vue({
+Vue.config.productionTip = false
+
+const vm = new Vue({
     el:'#app',
     render: h => h(App),
     beforeCreate(){      //全局事件总线
