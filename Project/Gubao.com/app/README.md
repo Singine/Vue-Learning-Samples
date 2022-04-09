@@ -32,18 +32,18 @@
 
 ## 二、项目配置
 ### 2.1 浏览器自动打开
+> 在`package.json`文件中进行配置
 > ```json
-> package.json
->     "scripts": {
->         "serve": "vue-cli-service serve --open",
->         "build": "vue-cli-service build",
->         "lint": "vue-cli-service lint"
->     },
+> "scripts": {
+>     "serve": "vue-cli-service serve --open",
+>     "build": "vue-cli-service build",
+>     "lint": "vue-cli-service lint"
+> },
 > ```
 
 ### 2.2 关闭eslint校验工具
 > 根目录下创建`vue.config.js`,进行配置
-> ```json
+> ```js
 > module.exports = {
 >   lintOnSave: false //关闭eslint
 > }
