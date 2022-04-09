@@ -123,16 +123,54 @@
 > - params参数对应的路由信息要修改为 `path: "/search/:keyword"` 这里的 `/:keyword` 就是一个params参数的占位符
 
  ### 相关面试题
-> - 路由传递参数有哪几种写法？
+> 1. 路由传递参数有哪几种写法？
+>   有2种写法，传递字符串或传递对象。
 > ```
-> 有2种写法，传递字符串或传递对象
+>   this.$router.push(`/search/${this.keyword}?k=${this.keyword.toUpperCase()}`)
 > ```
->
-> - 对象传参中Path是否可以结合Params一起使用？
 > ```
-> 有2种写法，传递字符串或传递对象
+>   this.$router.push({
+>       name:'Search',
+>       params:{
+>           keyword:''||undefined
+>       },
+>       query:{
+>          k:this.keyword.toUpperCase()
+>       }
+>   })
 > ```
-> - 对象传参中Path是否可以结合Params一起使用？
+> 2. 对象传参中Path是否可以结合Params参数一起使用？
+>   不可以。
 > ```
-> 有2种写法，传递字符串或传递对象
+>   传递对象方式中，使用 `name` 来确定跳转的路径。
+>   使用 `path` 不能和 `params` 一起进行路由跳转。
 > ```
+> 3. 如何指定Params参数可传可不传？
+>   如果在配置路由的时候已经占位了Params参数 `:keyword` ，在路由跳转的不传递该参数，会导致路径出现问题。需要在占位时写成
+> ```
+>    :keyword?
+> ```
+> 4. 如果Params参数传的是空值怎么办？
+>   需要使用 `undefined` 来解决这个问题。
+> ```
+>   params:{
+>       keyword:''||undefined
+>    },
+> ```
+> 5. 路由组件能不能传递props数据？
+>   可以。
+>   1. 布尔值
+> ```
+>   在配置路由时设定 `props:true` ,可以将params参数变成 `$attrs` ,然后在路由组件中设定props数组引入即可。
+> ```
+>   2. 对象
+> ```
+>   在配置路由时设定 `props:{key:value}` ,可以额外传递若干个对象参数。
+> ```
+>   3. 函数
+> ```
+>   在配置路由时设定 `props:()=>{return{key:$route.params.keyword}}` ,可以返回params参数和query参数。
+> ```
+
+
+## 八、...

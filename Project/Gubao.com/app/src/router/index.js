@@ -25,35 +25,36 @@ export default new VueRouter({
         //重定向
         {
             path: '/',
-            redirect:'/home'
+            redirect: '/home'
         },
         {
             path: '/home',
             component: Home,
-            meta:{
-                showFooter:true   
+            meta: {
+                showFooter: true
             }
         },
         {
-            path: '/search/:keyword',
+            path: '/search/:keyword?',
             component: Search,
-            meta:{
-                showFooter:true   
+            meta: {
+                showFooter: true
             },
-            name:'Search'
+            name: 'Search',
+            props: true
         },
         {
             path: '/login',
             component: Login,
-            meta:{
-                showFooter:false   
+            meta: {
+                showFooter: false
             }
         },
         {
             path: '/register',
             component: Register,
-            meta:{
-                showFooter:false   
+            meta: {
+                showFooter: false
             }
         }]
 })
