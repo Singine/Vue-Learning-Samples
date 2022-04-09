@@ -30,17 +30,29 @@ export default new VueRouter({
         {
             path: '/home',
             component: Home,
+            meta:{
+                showFooter:true   
+            }
         },
         {
             path: '/search',
             component: Search,
+            meta:{
+                showFooter:true   
+            }
         },
         {
             path: '/login',
             component: Login,
+            meta:{
+                showFooter:false   
+            }
         },
         {
             path: '/register',
             component: Register,
+            meta:{
+                showFooter:false   
+            }
         }]
 })
