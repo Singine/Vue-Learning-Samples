@@ -35,11 +35,12 @@ export default new VueRouter({
             }
         },
         {
-            path: '/search',
+            path: '/search/:keyword',
             component: Search,
             meta:{
                 showFooter:true   
-            }
+            },
+            name:'Search'
         },
         {
             path: '/login',
