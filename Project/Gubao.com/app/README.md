@@ -185,9 +185,11 @@
 
 
 ## 八、多次执行相同push的问题
-> 声明式导航不会有此类问题，因为 `vue-router` 已经在底层解决了这个问题。
-> 编程式导航使用 `push()` 时，返回值为一个 `Promise` 对象，没有传入 `resolve` 或 `reject` 。
-> `push()` 是 `VueRouter.prototype` 的一个方法，在 `router` 中的 `index` 重写该方法即可。
+> 声明式导航不会有此类问题，因为 `vue-router` 已经在底层解决了这个问题
+> 
+> 编程式导航使用 `push()` 时，返回值为一个 `Promise` 对象，没有传入 `resolve` 或 `reject` 
+> 
+> `push()` 是 `VueRouter.prototype` 的一个方法，在 `router` 中的 `index` 重写该方法即可
 > ```
 >   let originPush = VueRouter.prototype.push;
 >   VueRouter.prototype.push = function (location,resolve,reject){
@@ -197,4 +199,17 @@
 >           originPush.call(this,location,() => {},() => {})
 >       }
 >   }
+> ```
+
+
+## 九、定义全局组件
+> 全局组件需要在 `main.js` 中进行配置
+> 
+> 全局组件可以在任一页面中直接使用，不需要导入声明
+> ```
+>   //将三级联动组件注册为全局组件
+>   import TypeNav from '@/pages/Home/TypeNav';
+> 
+>   //第一个参数：全局组件名字，第二个参数：全局组件
+>   Vue.component(TypeNav.name,TypeNav);
 > ```
