@@ -184,4 +184,17 @@
 > ```
 
 
-## 八、...
+## 八、多次执行相同push的问题
+> 声明式导航不会有此类问题，因为 `vue-router` 已经在底层解决了这个问题。
+> 编程式导航使用 `push()` 时，返回值为一个 `Promise` 对象，没有传入 `resolve` 或 `reject` 。
+> `push()` 是 `VueRouter.prototype` 的一个方法，在 `router` 中的 `index` 重写该方法即可。
+> ```
+>   let originPush = VueRouter.prototype.push;
+>   VueRouter.prototype.push = function (location,resolve,reject){
+>       if(resolve && reject){
+>           originPush.call(this,location,resolve,reject)
+>       }else{
+>           originPush.call(this,location,() => {},() => {})
+>       }
+>   }
+> ```
