@@ -15,7 +15,10 @@
                 <a href="">{{ c1.categoryName }}</a>
               </h3>
 
-              <div class="item-list clearfix" :style="{display:currentIndex==index?'block':'none'}">
+              <div
+                class="item-list clearfix"
+                :style="{ display: currentIndex == index ? 'block' : 'none' }"
+              >
                 <div
                   class="subitem"
                   v-for="(c2, index) in c1.categoryChild"
@@ -56,6 +59,8 @@
 
 <script>
 import { mapState } from "vuex";
+import throttle from "lodash/throttle";
+
 export default {
   name: "Nav",
   data() {
@@ -64,10 +69,10 @@ export default {
     };
   },
   methods: {
-    changeBackColor(index) {
+    changeBackColor: throttle(function (index) {
       this.currentIndex = index;
-      console.log(index);
-    },
+    }, 50),
+
     clearBackColor() {
       this.currentIndex = -1;
     },
