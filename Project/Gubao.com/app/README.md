@@ -252,4 +252,127 @@
 > ```
 
 
-## 十一、 ...
+## 十一、前端通过代理解决跨域问题
+> 在根目录下的 `vue.config.js` 中配置 `proxy` ，通过代理解决跨域问题
+> 
+> 我们在封装axios的时候已经设置了 `baseURL` ,所以所有的请求都会携带 `/api` 
+> 
+> 如果项目没有封装axios，或者没有配置baseURL，建议进行配置
+> ```
+>   module.exports = {
+>       lintOnSave: false,  //关闭eslint
+> 
+>       devServer: {
+>           inline: false,  // true 则热更新，false 则手动刷新，默认值为 true
+>           port: 8888,  // development server port
+>           //代理服务器解决跨域
+>           proxy: {        
+>               '/api': {
+>                   target: 'http://39.98.123.211',  //提供数据的服务器地址
+>               }
+>           },
+>       }
+>   }
+> ```
+
+
+## 十二、请求接口统一封装
+> 在文件夹api中创建 `index.js` 文件，用于封装所有请求
+> 
+> 将每个请求封装为一个函数，并暴露出去，组件只需要调用相应函数即可，这样当我们的接口比较多时，如果需要修改只需要修改该文件即可
+> ```
+>   import requests from "@/api/request";
+>   
+>   export const reqCateGoryList = () => {
+>       return requests({
+>           url: '/product/getBaseCategoryList',
+>           method: 'GET'
+>       })
+>   }
+> ```
+> 当组件想要使用相关请求时，只需要导入相关函数即可，以上图的 `reqCateGoryList` 为例:
+> ```
+>   import {reqCateGoryList} from './api'
+>   reqCateGoryList();  //发起请求
+> ```
+
+
+## 十三、手动引入vuex
+> 安装 `vuex` ，`Vue2` 环境下需要安装 `vuex@3` 版本
+> 
+> 根目录创建 `store` 文件夹，文件夹下创建 `index.js` ，内容如下：
+> ```
+>   import Vue from 'vue'
+>   import Vuex from 'vuex'
+>   
+>   Vue.use(Vuex)
+>   
+>   export default new Vuex.Store({  //对外暴露store的一个实例
+>       state:{},
+>       mutations:{},
+>       actions:{},
+>   })
+> ```
+> 在入口文件 main.js 中进行引入
+> ```
+>   import store from './store'
+> 
+>   new Vue({
+>     render: h => h(App),
+>     router,
+>     store  //注册store,此时组件中都会拥有$store
+>   }).$mount('#app')
+> ```
+> vuex 可以模块化开发，是数据存储更清晰，维护和操作更方便
+> ```
+>   const state = {}  // state 仓库存储数据的地方
+>   
+>   const mutations = {}  // mutations 修改state的唯一手段
+>   
+>   const actions = {}  // actions 处理action
+>   
+>   const getters = {}  // getters 可以理解为计算属性 让组件获取仓库数据更方便
+>   
+>   export default {
+>       state,
+>       mutations,
+>       actions,
+>       getters
+>   }
+> ```
+> ```
+>   export default new Vuex.Store({
+>      modules:{
+>          home,
+>      }
+>   })
+> ```
+
+
+## 十四、函数的防抖和节流
+> 在进行窗口的resize、scroll，输入框内容校验等操作时，如果事件处理函数调用的频率无限制，会加重浏览器的负担，导致用户体验非常糟糕
+> 
+> 此时我们可以引入 `ladash.js` ，采用 `_.debounce`（防抖）和 `_.throttle`（节流）函数的方式来减少调用频率，同时又不影响实际效果
+
+### 防抖
+> 前面的所有触发都被取消，最后一次执行在规定的时间之后才会触发，如果连续快速触发只会执行一次
+> ```
+>   input.oninput = _.debounce(function(){
+>       // 发送ajax请求 1s后执行一次 期间的所有操作全都取消
+>   },1000)
+> ```
+
+### 节流
+> 在规定的间隔时间范围内不会重复触发回调，只有大于这个时间间隔才会触发回调，把频繁触发变为少量触发
+> ```
+>   button.onclick = _.throttle(function(){
+>       // 执行操作，在1s内无论点击几次，只执行一次
+>   },1000)
+> ```
+
+> 防抖：用户操作很频繁，但是只执行一次
+> 
+> 节流：用户操作很频繁，但是把频繁的操作变为一定时间内少量的操作，给浏览器充分的时间来解析代码
+
+
+## 十五、...
