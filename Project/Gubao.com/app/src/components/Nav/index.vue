@@ -113,8 +113,12 @@ export default {
         } else if (category3id) {
           query.category3Id = category3id;
         }
-        location.query = query;
-        this.$router.push(location);
+
+        if (this.$route.params) {
+          location.params = this.$route.params
+          location.query = query;
+          this.$router.push(location);
+        }
       }
     },
     enterShow() {
@@ -127,7 +131,6 @@ export default {
     },
   },
   mounted() {
-   
     this.show = this.$route.path !== "/home" ? false : true;
   },
   computed: {
@@ -263,20 +266,17 @@ export default {
       }
     }
 
-    .sort-enter{
+    .sort-enter {
       height: 0px;
     }
 
-    .sort-enter-to{
+    .sort-enter-to {
       height: 461px;
     }
 
-    .sort-enter-active{
+    .sort-enter-active {
       transition: all 0.3s ease;
     }
-
-  
-
   }
 }
 </style>

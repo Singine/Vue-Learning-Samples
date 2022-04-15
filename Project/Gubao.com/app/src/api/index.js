@@ -10,6 +10,7 @@
 
 
 import requests from "./request";
+import mockRequests from "./mockAjax";
 
 // 三级联动接口
 // GET api/product/getBaseCategoryList
@@ -20,6 +21,14 @@ export const reqCategoryList = ()=>{
     // 返回的是Promise对象
     return requests({
         url:'product/getBaseCategoryList',
+        method:'GET'
+    })
+}
+
+
+export const reqBannerList = ()=>{
+    return mockRequests({
+        url:'/banner',
         method:'GET'
     })
 }
