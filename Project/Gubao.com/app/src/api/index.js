@@ -32,3 +32,20 @@ export const reqBannerList = ()=>{
         method:'GET'
     })
 }
+
+
+export const reqFloorList = ()=>{
+    return mockRequests({
+        url:'/floor',
+        method:'GET'
+    })
+}
+
+
+export const reqGetSearchInfo = (data)=>{
+    return requests({
+        url:'/list',
+        method:'POST',
+        data
+    })
+}

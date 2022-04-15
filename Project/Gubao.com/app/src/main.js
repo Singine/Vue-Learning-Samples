@@ -4,12 +4,14 @@ import router from '@/router'
 import store from '@/store'
 
 import Nav from '@/components/Nav'
+import Carsouel from '@/components/Carsouel'
 
 import '@/mock/mockServe'
 import 'swiper/css/swiper.css'
 
 Vue.config.productionTip = false
 Vue.component(Nav.name,Nav)
+Vue.component(Carsouel.name,Carsouel)
 
 new Vue({
   render: h => h(App),
