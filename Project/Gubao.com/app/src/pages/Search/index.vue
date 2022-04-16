@@ -18,6 +18,14 @@
             >
               {{ searchParams.categoryName }} x
             </li>
+
+            <li
+              class="with-x"
+              @click="removeKeyword"
+              v-if="searchParams.keyword"
+            >
+              {{ searchParams.keyword }} x
+            </li>
           </ul>
         </div>
 
@@ -163,6 +171,14 @@ export default {
 
       if (this.$route.params) {
         this.$router.push({ name: "Search", params: this.$route.params });
+      }
+    },
+    removeKeyword() {
+      this.searchParams.keyword = undefined;
+      this.getData();
+      this.$bus.$emit("clear");
+      if (this.$route.query) {
+        this.$router.push({ name: "Search", query: this.$route.query });
       }
     },
   },
