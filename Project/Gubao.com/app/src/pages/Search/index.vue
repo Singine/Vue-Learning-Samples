@@ -26,34 +26,48 @@
             >
               {{ searchParams.keyword }} x
             </li>
+
+            <li
+              class="with-x"
+              @click="removeTrademark"
+              v-if="searchParams.trademark"
+            >
+              {{ searchParams.trademark.split(":")[1] }} x
+            </li>
+
+            <li
+              class="with-x"
+              @click="removeAttr(attrValue)"
+              v-for="(attrValue, index) in searchParams.props"
+              :key="index"
+            >
+              {{ attrValue.split(":")[1] }} x
+            </li>
           </ul>
         </div>
 
         <!--selector-->
-        <SearchSelector />
+        <SearchSelector @trademarkInfo="trademarkInfo" @attrInfo="attrInfo" />
 
         <!--details-->
         <div class="details clearfix">
           <div class="sui-navbar">
             <div class="navbar-inner filter">
               <ul class="sui-nav">
-                <li class="active">
-                  <a href="#">综合</a>
+                <li class="active" @click="">
+                  <a>综合</a>
                 </li>
                 <li>
-                  <a href="#">销量</a>
+                  <a>价格</a>
                 </li>
                 <li>
-                  <a href="#">新品</a>
+                  <a>销量</a>
                 </li>
                 <li>
-                  <a href="#">评价</a>
+                  <a>新品</a>
                 </li>
                 <li>
-                  <a href="#">价格⬆</a>
-                </li>
-                <li>
-                  <a href="#">价格⬇</a>
+                  <a>评价</a>
                 </li>
               </ul>
             </div>
@@ -147,7 +161,7 @@ export default {
         category3Id: "",
         categoryName: "",
         keyword: "",
-        order: "",
+        order: "1:desc",
         pageNo: 1,
         pageSize: 10,
         props: [],
@@ -180,6 +194,25 @@ export default {
       if (this.$route.query) {
         this.$router.push({ name: "Search", query: this.$route.query });
       }
+    },
+    removeTrademark() {
+      this.searchParams.trademark = undefined;
+      this.getData();
+    },
+    trademarkInfo(trademark) {
+      this.searchParams.trademark = `${trademark.tmId}:${trademark.tmName}`;
+      this.getData();
+    },
+    attrInfo(attr, attrValue) {
+      let prop = `${attr.attrId}:${attrValue}:${attr.attrName}`;
+      if (this.searchParams.props.indexOf(prop) === -1) {
+        this.searchParams.props.push(prop);
+      }
+      this.getData();
+    },
+    removeAttr(prop) {
+      this.searchParams.props.shift(prop);
+      this.getData();
     },
   },
   mounted() {
