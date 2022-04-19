@@ -54,11 +54,23 @@
           <div class="sui-navbar">
             <div class="navbar-inner filter">
               <ul class="sui-nav">
-                <li class="active" @click="">
-                  <a>综合</a>
+                <li :class="{ active: isOrder(1) }" @click="changeOrder('1')">
+                  <a
+                    >综合<span
+                      v-show="isOrder(1)"
+                      class="iconfont"
+                      :class="{ 'icon-UP': isUp, 'icon-DOWN': isDown }"
+                    ></span
+                  ></a>
                 </li>
-                <li>
-                  <a>价格</a>
+                <li :class="{ active: isOrder(2) }" @click="changeOrder('2')">
+                  <a
+                    >价格<span
+                      v-show="isOrder(2)"
+                      class="iconfont"
+                      :class="{ 'icon-UP': isUp, 'icon-DOWN': isDown }"
+                    ></span
+                  ></a>
                 </li>
                 <li>
                   <a>销量</a>
@@ -110,35 +122,8 @@
               </li>
             </ul>
           </div>
-          <div class="fr page">
-            <div class="sui-pagination clearfix">
-              <ul>
-                <li class="prev disabled">
-                  <a href="#">«上一页</a>
-                </li>
-                <li class="active">
-                  <a href="#">1</a>
-                </li>
-                <li>
-                  <a href="#">2</a>
-                </li>
-                <li>
-                  <a href="#">3</a>
-                </li>
-                <li>
-                  <a href="#">4</a>
-                </li>
-                <li>
-                  <a href="#">5</a>
-                </li>
-                <li class="dotted"><span>...</span></li>
-                <li class="next">
-                  <a href="#">下一页»</a>
-                </li>
-              </ul>
-              <div><span>共10页&nbsp;</span></div>
-            </div>
-          </div>
+          <Pagination />
+          
         </div>
       </div>
     </div>
@@ -148,6 +133,7 @@
 <script>
 import { mapGetters, mapState } from "vuex";
 import SearchSelector from "./SearchSelector/SearchSelector";
+
 export default {
   name: "Search",
   components: {
@@ -161,7 +147,7 @@ export default {
         category3Id: "",
         categoryName: "",
         keyword: "",
-        order: "1:desc",
+        order: "2:asc",
         pageNo: 1,
         pageSize: 10,
         props: [],
@@ -214,12 +200,35 @@ export default {
       this.searchParams.props.shift(prop);
       this.getData();
     },
+
+    changeOrder(flag) {
+      let orderFlag = this.searchParams.order.split(":")[0];
+      let orderSort = this.searchParams.order.split(":")[1];
+      let orderNew= "";
+      if (orderFlag === flag) {
+        orderNew = `${flag}:${orderSort=="desc"?"asc":"desc"}`;
+      } else {
+        orderNew = `${flag}:${"desc"}`;
+      }
+
+      this.searchParams.order = orderNew
+      this.getData()
+    },
   },
-  mounted() {
-    this.getData();
-  },
+
   computed: {
     ...mapGetters(["goodsList", "trademarkList", "attrsList"]),
+    isOrder() {
+      return function (num) {
+        return this.searchParams.order.includes(num);
+      };
+    },
+    isUp() {
+      return this.searchParams.order.includes("asc");
+    },
+    isDown() {
+      return this.searchParams.order.includes("desc");
+    },
   },
   watch: {
     $route(newVal, oldVal) {
@@ -229,6 +238,9 @@ export default {
       this.searchParams.category2Id = undefined;
       this.searchParams.category3Id = undefined;
     },
+  },
+  mounted() {
+    this.getData();
   },
 };
 </script>
@@ -476,92 +488,7 @@ export default {
         }
       }
 
-      .page {
-        width: 733px;
-        height: 66px;
-        overflow: hidden;
-        float: right;
-
-        .sui-pagination {
-          margin: 18px 0;
-
-          ul {
-            margin-left: 0;
-            margin-bottom: 0;
-            vertical-align: middle;
-            width: 490px;
-            float: left;
-
-            li {
-              line-height: 18px;
-              display: inline-block;
-
-              a {
-                position: relative;
-                float: left;
-                line-height: 18px;
-                text-decoration: none;
-                background-color: #fff;
-                border: 1px solid #e0e9ee;
-                margin-left: -1px;
-                font-size: 14px;
-                padding: 9px 18px;
-                color: #333;
-              }
-
-              &.active {
-                a {
-                  background-color: #fff;
-                  color: #e1251b;
-                  border-color: #fff;
-                  cursor: default;
-                }
-              }
-
-              &.prev {
-                a {
-                  background-color: #fafafa;
-                }
-              }
-
-              &.disabled {
-                a {
-                  color: #999;
-                  cursor: default;
-                }
-              }
-
-              &.dotted {
-                span {
-                  margin-left: -1px;
-                  position: relative;
-                  float: left;
-                  line-height: 18px;
-                  text-decoration: none;
-                  background-color: #fff;
-                  font-size: 14px;
-                  border: 0;
-                  padding: 9px 18px;
-                  color: #333;
-                }
-              }
-
-              &.next {
-                a {
-                  background-color: #fafafa;
-                }
-              }
-            }
-          }
-
-          div {
-            color: #333;
-            font-size: 14px;
-            float: right;
-            width: 241px;
-          }
-        }
-      }
+      
     }
   }
 }
