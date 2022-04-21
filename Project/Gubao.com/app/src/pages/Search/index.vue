@@ -89,9 +89,7 @@
               <li class="yui3-u-1-5" v-for="item in goodsList" :key="item.id">
                 <div class="list-wrap">
                   <div class="p-img">
-                    <a href="item.html" target="_blank"
-                      ><img :src="item.defaultImg"
-                    /></a>
+                    <router-link :to="`/detail/${item.id}`"><img :src="item.defaultImg" /></router-link>
                   </div>
                   <div class="price">
                     <strong>
@@ -122,7 +120,7 @@
               </li>
             </ul>
           </div>
-          <Pagination />
+          <Pagination @getPageNo="getPageNo" :pageNo="searchParams.pageNo" :pageSize="searchParams.pageSize" :total="total" :continues="5" />
           
         </div>
       </div>
@@ -214,9 +212,19 @@ export default {
       this.searchParams.order = orderNew
       this.getData()
     },
+    getPageNo(pageNo){
+      console.log(pageNo);
+      this.searchParams.pageNo = pageNo
+      this.getData()
+    }
   },
 
   computed: {
+    ...mapState({
+      total(state){
+        return state.search.searchList.total
+      }
+    }),
     ...mapGetters(["goodsList", "trademarkList", "attrsList"]),
     isOrder() {
       return function (num) {

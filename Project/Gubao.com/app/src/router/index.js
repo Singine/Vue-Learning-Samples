@@ -13,10 +13,7 @@
 import Vue from "vue"
 import VueRouter from "vue-router"
 
-import Home from '@/pages/Home'
-import Search from '@/pages/Search'
-import Login from '@/pages/Login'
-import Register from '@/pages/Register'
+import routes from "./routes"
 
 Vue.use(VueRouter)
 
@@ -39,42 +36,8 @@ VueRouter.prototype.replace = function (location, resolve, reject) {
 }
 
 export default new VueRouter({
-    routes: [
-        //重定向
-        {
-            path: '/',
-            redirect: '/home'
-        },
-        {
-            path: '/home',
-            component: Home,
-            meta: {
-                showFooter: true
-            }
-        },
-        {
-            path: '/search/:keyword?',
-            component: Search,
-            meta: {
-                showFooter: true
-            },
-            name: 'Search',
-            props: true
-        },
-        {
-            path: '/login',
-            component: Login,
-            meta: {
-                showFooter: false
-            }
-        },
-        {
-            path: '/register',
-            component: Register,
-            meta: {
-                showFooter: false
-            }
-        }
-    ],
-
+    routes,
+    scrollBehavior(to,from,savedPosition){
+        return {x:0,y:0}
+    }
 })

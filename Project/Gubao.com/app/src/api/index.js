@@ -17,35 +17,44 @@ import mockRequests from "./mockAjax";
 
 
 
-export const reqCategoryList = ()=>{
+export const reqCategoryList = () => {
     // 返回的是Promise对象
     return requests({
-        url:'product/getBaseCategoryList',
-        method:'GET'
+        url: 'product/getBaseCategoryList',
+        method: 'GET'
     })
 }
 
 
-export const reqBannerList = ()=>{
+export const reqBannerList = () => {
     return mockRequests({
-        url:'/banner',
-        method:'GET'
+        url: '/banner',
+        method: 'GET'
     })
 }
 
 
-export const reqFloorList = ()=>{
+export const reqFloorList = () => {
     return mockRequests({
-        url:'/floor',
-        method:'GET'
+        url: '/floor',
+        method: 'GET'
     })
 }
 
 
-export const reqGetSearchInfo = (data)=>{
+export const reqGetSearchInfo = (data) => {
     return requests({
-        url:'/list',
-        method:'POST',
+        url: '/list',
+        method: 'POST',
         data
     })
 }
+
+export const reqGetDetail = (skuid) => {
+    return requests({
+        url: `/item/${skuid}`,
+        method: 'GET'
+    })
+}
+
+
