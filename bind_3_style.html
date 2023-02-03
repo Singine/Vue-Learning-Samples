@@ -37,7 +37,7 @@
 </head>
 <body>
 <div id="root" class="main">
-  <h1 class="gubao" :class="styleChange" :style="styleObj">Hi Gubao!</h1>
+  <h1 class="gubao" :class="styleChange" :style="fontSize">Hi Gubao!</h1>
   <h2 class="bobo" :class="styleChange">{{action}}</h2>
   <br>
   <button @click="changeStyle">点击变变</button>
@@ -51,13 +51,18 @@
     data:{
       action:"要啵啵",
       styleChange:['font_align_center','font_weight_bold'],
-      styleObj:{
-        fontSize: 40 + 'px'
-      }
+      size:40,
+      fontSize:'',
+    },
+  
+    watch:{
+      size(val){
+        this.fontSize = 'fontSize:' + val + 'px'
+      },
     },
     methods:{
       changeStyle(){
-        this.styleObj.fontSize = 50 + 'px'
+        this.size += 5
       }
     }
 
